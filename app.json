@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "brainWeb",
+    "name": "Contador Juan",
     "slug": "brainWeb",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#263E63"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,16 +17,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.juanluna.counter",
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+      "package": "com.juanluna.counter",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
   }
-}
+  }
