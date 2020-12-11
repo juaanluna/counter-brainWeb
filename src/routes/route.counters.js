@@ -16,7 +16,7 @@ const RouteCounters = () => {
       <Stack.Screen
         name="Counters"
         component={Counters}
-        options={{ title: "COUNTERS" }}
+        options={{ title: "Lista de contadores" }}
       />
     </Stack.Navigator>
   );

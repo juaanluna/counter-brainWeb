@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const Button = ({ title, onPress, disabled }) => {
+const Button = ({ icon, title, onPress, disabled }) => {
   return (
     <View>
       <TouchableOpacity
@@ -9,7 +9,10 @@ const Button = ({ title, onPress, disabled }) => {
         style={styles.container}
         disabled={disabled}
       >
-        <Text style={styles.text}>{title}</Text>
+        <View style={{flexDirection:'row', alignItems:'center', }}>
+          <Text style={styles.icon}>{icon}</Text>
+          <Text style={styles.text}>{title}</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -39,7 +42,11 @@ const styles = StyleSheet.create({
   text: {
     color: "#001C47",
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 14,
+  },
+  icon: {
+    color: "#001C47",
+    marginRight:8,
   },
 });
 

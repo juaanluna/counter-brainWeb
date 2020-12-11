@@ -15,7 +15,7 @@ const Routes = () => {
   
         switch (route.name) {
           case 'COUNTERS':
-            iconName = 'plus-circle';
+            iconName = 'list';
             break;
           case 'CONFIG':
             iconName = 'settings';
@@ -44,7 +44,7 @@ const Routes = () => {
       <Tab.Screen
         name="CONFIG"
         component={RouteConfig}
-        options={{ headerShown: false, title:'CONFIGURÇÕES'}}
+        options={{ headerShown: false, title:'CONFIGURAÇÕES'}}
       />
     </Tab.Navigator>
   );

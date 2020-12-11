@@ -12,12 +12,14 @@ const CounterComponent = ({ name, value }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#D8D8D8",
+    // backgroundColor: "#D8D8D8",
+    backgroundColor: "#0082C9",
     alignItems: "center",
     justifyContent: "center",
     marginTop: "10%",
     marginHorizontal: "10%",
     shadowColor: "#000",
+    borderRadius: 40,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -28,10 +30,11 @@ const styles = StyleSheet.create({
     elevation: 9,
   },
   name: {
-    color: "grey",
+    color: "white",
     padding: "3%",
   },
   value: {
+    color: "white",
     fontWeight: "bold",
     fontSize: 80,
   },

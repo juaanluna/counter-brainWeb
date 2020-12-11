@@ -2,11 +2,18 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, StatusBar, Alert, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Button from "../../components/button/Button";
-import { createCount, deleteCount } from "../../store/counters/counters.action";
+import {
+  createCount,
+  deleteCount,
+  updateCount,
+} from "../../store/counters/counters.action";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/Feather";
 
 const Config = ({ route }) => {
   const id = route?.params?.id;
+  const { navigate } = useNavigation();
 
   const [counter, setCounter] = useState(0);
   const [name, setName] = useState("");
@@ -22,17 +29,36 @@ const Config = ({ route }) => {
     setCounter((oldValue) => oldValue - 1);
   }, []);
 
+  const clearValues = useCallback(() => {
+    setCounter(0);
+    setName("");
+  }, []);
+
   const onRegister = useCallback(() => {
     const id = (Math.random() * 100).toFixed().toString();
     const values = { id, counterValue: counter, name };
+    if (!name) {
+      return Alert.alert("Campo inválido", "Insira um nome válido", [
+        { text: "OK" },
+      ]);
+    }
     Alert.alert("Sucesso", "Contador adicionado", [{ text: "OK" }]);
+    navigate("Counters");
     dispatch(createCount(values));
-  }, [dispatch, counter, name]);
+  }, [dispatch, counter, name, navigate]);
+
+  const onUpdate = useCallback(() => {
+    Alert.alert("Atualizado", "Contador atualizado", [{ text: "OK" }]);
+    navigate("Counters");
+    const values = { id, counterValue: counter, name };
+    dispatch(updateCount(values));
+  }, [dispatch, counter, name, id]);
 
   const onDelete = useCallback(() => {
-    Alert.alert("Sucesso", "Contador deletado", [{ text: "OK" }]);
+    Alert.alert("Deletado", "Contador deletado", [{ text: "OK" }]);
+    navigate("Counters");
     dispatch(deleteCount(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, navigate]);
 
   useEffect(() => {
     counters.filter((counter) => {
@@ -48,7 +74,7 @@ const Config = ({ route }) => {
       style={{
         flex: 1,
         alignItems: "center",
-        backgroundColor: "#0082C9",
+        // backgroundColor: "#0082C9",
       }}
     >
       <StatusBar backgroundColor="#001C47" barStyle="light-content" />
@@ -56,7 +82,7 @@ const Config = ({ route }) => {
         style={{
           fontSize: 24,
           fontWeight: "bold",
-          marginTop: 10,
+          marginTop: 30,
           color: "#2B404C",
         }}
       >
@@ -69,11 +95,15 @@ const Config = ({ route }) => {
           alignItems: "center",
         }}
       >
-        <Button title="Adicionar contador" onPress={() => onRegister()} />
         <Button
-          title="Remover contador"
-          onPress={() => onDelete()}
-          disabled={id ? false : true}
+          title="Adicionar contador"
+          onPress={() => onRegister()}
+          icon={<Icon name={"plus"} style={{ fontSize: 30 }} />}
+        />
+        <Button
+          title="Zerar valores"
+          onPress={() => clearValues()}
+          icon={<Icon name={"sliders"} style={{ fontSize: 30 }} />}
         />
       </View>
 
@@ -81,7 +111,7 @@ const Config = ({ route }) => {
         style={{
           fontSize: 24,
           fontWeight: "bold",
-          marginTop: "50%",
+          marginTop: "40%",
           marginBottom: 20,
           color: "#2B404C",
         }}
@@ -101,6 +131,15 @@ const Config = ({ route }) => {
             marginBottom: 10,
             paddingLeft: 10,
             borderRadius: 20,
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 0.32,
+            shadowRadius: 5.46,
+
+            elevation: 9,
           }}
         />
 
@@ -112,6 +151,15 @@ const Config = ({ route }) => {
             justifyContent: "center",
             backgroundColor: "#FFF",
             borderRadius: 20,
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 0.32,
+            shadowRadius: 5.46,
+
+            elevation: 9,
           }}
         >
           <TouchableOpacity
@@ -136,7 +184,19 @@ const Config = ({ route }) => {
             <Text style={{ fontSize: 40, color: "#001C47" }}>+</Text>
           </TouchableOpacity>
         </View>
-        <Button title="Zerar contador" onPress={() => setCounter(0)} />
+        <View style={{ flexDirection: "row", marginTop: 15 }}>
+          <Button
+            title="Atualizar contador"
+            onPress={() => onUpdate()}
+            icon={<Icon name={"edit"} style={{ fontSize: 30 }} />}
+          />
+          <Button
+            title="Remover contador"
+            onPress={() => onDelete()}
+            disabled={id ? false : true}
+            icon={<Icon name={"trash-2"} style={{ fontSize: 30 }} />}
+          />
+        </View>
       </View>
     </View>
   );

@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import CounterComponent from "../../components/counter/Counter";
+import CounterComponent from "../../components/counterContainer/Counter";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#0082C9",
+    // backgroundColor: "#0082C9",
   },
   scroll: {
     width: "100%",

@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Contador Juan",
+    "name": "Contador do Juan",
     "slug": "brainWeb",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
